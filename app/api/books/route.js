@@ -5,27 +5,26 @@ import pool from '../../../lib/db';
 
 export async function POST(request) {
     try {
-        const { title, author, genre, description, numberOfVolumes } = await request.json();
+        const { title, author, genre, publisher, numberOfVolumes } = await request.json();
         const client = await pool.connect();
         
         try {
             await client.query('BEGIN');
             
             // Insert book
-            const bookId = uuidv4();
+            const titleId = uuidv4();
             await client.query(
-                'INSERT INTO books (id, title, author, genre, description) VALUES ($1, $2, $3, $4, $5)',
-                [bookId, title, author, genre, description]
+                'INSERT INTO books ( title, author_id, genre_id, publisher_id, title_id) VALUES ($1, $2, $3, $4, $5)',
+                [ title, author, genre, publisher, titleId]
             );
             
             // Insert volumes
-            for (let i = 0; i < numberOfVolumes; i++) {
-                await client.query(
-                    'INSERT INTO volumes (book_id, condition, location) VALUES ($1, $2, $3)',
-                    [bookId, 'New', 'Main Shelf']
-                );
-            }
-            
+            // for (let i = 0; i < numberOfVolumes; i++) {
+            //     await client.query(
+            //         'INSERT INTO volumes (book_id, condition, location) VALUES ($1, $2, $3)',
+            //         [bookId, 'New', 'Main Shelf']
+            //     );
+            // }
             await client.query('COMMIT');
             
             return NextResponse.json({ message: 'Book added successfully' }, { status: 201 });
