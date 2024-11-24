@@ -17,10 +17,10 @@ export default function NewBookForm() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("i was tapped");
+       
         try {
             
-            
+            console.log("i was tapped");
             const response = await fetch('/api/books', {
                 method: 'POST',
                 headers: {

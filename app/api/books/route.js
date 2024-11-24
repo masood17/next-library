@@ -10,6 +10,9 @@ export async function POST(request) {
         
         try {
             await client.query('BEGIN');
+
+            //add if data doesn't exist
+            await client.query('')
             
             // Insert book
             const titleId = uuidv4();
