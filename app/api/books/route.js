@@ -12,13 +12,28 @@ export async function POST(request) {
             await client.query('BEGIN');
 
             //add if data doesn't exist
-            await client.query('')
+            await client.query(`
+                INSERT INTO authors (full_name) 
+                SELECT $1
+                WHERE NOT EXISTS (
+                    SELECT 1
+                    FROM authors
+                    WHERE full_name = $1
+                )
+            `, [author]);
+
             
+
+            //assign id to consts
+            const author_id = await client.query(
+                'SELECT author_id FROM authors WHERE full_name = $1',
+                [author]
+            );
             // Insert book
             const titleId = uuidv4();
             await client.query(
                 'INSERT INTO books ( title, author_id, genre_id, publisher_id, title_id) VALUES ($1, $2, $3, $4, $5)',
-                [ title, author, genre, publisher, titleId]
+                [ title, author_id, genre, publisher, titleId]
             );
             
             // Insert volumes
