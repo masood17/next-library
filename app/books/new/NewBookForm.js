@@ -78,7 +78,7 @@ export default function NewBookForm() {
                     required
                 >
                     <option value="">Select a genre</option>
-                    <option value="Fiction">Fiction</option>
+                    <option value="التاريخ">التاريخ</option>
                     <option value="Non-Fiction">Non-Fiction</option>
                     <option value="Science Fiction">Science Fiction</option>
                     <option value="Mystery">Mystery</option>

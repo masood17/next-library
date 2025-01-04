@@ -12,28 +12,67 @@ export async function POST(request) {
             await client.query('BEGIN');
 
             //add if data doesn't exist
-            await client.query(`
+            const authorResult = await client.query(`
                 INSERT INTO authors (full_name) 
-                SELECT $1
-                WHERE NOT EXISTS (
-                    SELECT 1
-                    FROM authors
-                    WHERE full_name = $1
-                )
+                VALUES ($1)
+                ON CONFLICT (full_name) DO NOTHING
+                    RETURNING author_id
+                
             `, [author]);
 
             
-
+            let authorId;
             //assign id to consts
-            const author_id = await client.query(
-                'SELECT author_id FROM authors WHERE full_name = $1',
-                [author]
+            if (authorResult.rows.length > 0) {
+                authorId = authorResult.rows[0].author_id;
+            } else {
+                // If no rows were inserted, find the existing author's ID
+                const existingAuthorResult = await client.query(
+                    'SELECT author_id FROM authors WHERE full_name = $1',
+                    [author]
+                );
+                authorId = existingAuthorResult.rows[0].author_id;
+            }
+
+
+            // genre query 
+            let genreId
+            const queriedGenreId = await client.query(
+                'SELECT genre_id FROM genres WHERE name = $1',
+                [genre]
             );
+
+            genreId = queriedGenreId.rows[0].genre_id;
+
+            // publisher query
+
+                      //add if data doesn't exist
+                      const publisherResult = await client.query(`
+                        INSERT INTO publishers (name) 
+                        VALUES ($1)
+                        ON CONFLICT (name) DO NOTHING
+                            RETURNING publisher_id
+                        
+                    `, [publisher]);
+        
+                    
+                    let publisherId;
+                    //assign id to consts
+                    if (publisherResult.rows.length > 0) {
+                        publisherId = publisherResult.rows[0].publisher_id;
+                    } else {
+                        // If no rows were inserted, find the existing publisher's ID
+                        const existingPublisherResult = await client.query(
+                            'SELECT publisher_id FROM publishers WHERE name = $1',
+                            [publisher]
+                        );
+                        publisherId = existingPublisherResult.rows[0].publisher_id;
+                    }
             // Insert book
             const titleId = uuidv4();
             await client.query(
                 'INSERT INTO books ( title, author_id, genre_id, publisher_id, title_id) VALUES ($1, $2, $3, $4, $5)',
-                [ title, author_id, genre, publisher, titleId]
+                [ title, authorId, genreId, publisherId, titleId]
             );
             
             // Insert volumes
