@@ -11,12 +11,10 @@ export async function POST(request) {
         try {
             await client.query('BEGIN');
 
-            //add if data doesn't exist
+            //check if author exists
             const authorResult = await client.query(`
-                INSERT INTO authors (full_name) 
-                VALUES ($1)
-                ON CONFLICT (full_name) DO NOTHING
-                    RETURNING author_id
+                SELECT author_id FROM authors
+                WHERE full_name = $1
                 
             `, [author]);
 
@@ -26,12 +24,12 @@ export async function POST(request) {
             if (authorResult.rows.length > 0) {
                 authorId = authorResult.rows[0].author_id;
             } else {
-                // If no rows were inserted, find the existing author's ID
-                const existingAuthorResult = await client.query(
-                    'SELECT author_id FROM authors WHERE full_name = $1',
+                // If no rows were found, insert author and get author's ID
+                const insertAuthor = await client.query(
+                    'INSERT INTO authors (full_name) VALUES ($1) returning author_id',
                     [author]
                 );
-                authorId = existingAuthorResult.rows[0].author_id;
+                authorId = insertAuthor.rows[0].author_id;
             }
 
 
@@ -46,12 +44,11 @@ export async function POST(request) {
 
             // publisher query
 
-                      //add if data doesn't exist
+                      //check if data exist
                       const publisherResult = await client.query(`
-                        INSERT INTO publishers (name) 
-                        VALUES ($1)
-                        ON CONFLICT (name) DO NOTHING
-                            RETURNING publisher_id
+                        SELECT publisher_id FROM publishers 
+                        WHERE name = $1
+                        
                         
                     `, [publisher]);
         
@@ -61,12 +58,12 @@ export async function POST(request) {
                     if (publisherResult.rows.length > 0) {
                         publisherId = publisherResult.rows[0].publisher_id;
                     } else {
-                        // If no rows were inserted, find the existing publisher's ID
-                        const existingPublisherResult = await client.query(
-                            'SELECT publisher_id FROM publishers WHERE name = $1',
+                        // insert publisher's ID
+                        const insertPublisher = await client.query(
+                            'INSERT INTO publishers (name) VALUES ($1) returning publisher_id',
                             [publisher]
                         );
-                        publisherId = existingPublisherResult.rows[0].publisher_id;
+                        publisherId = insertPublisher.rows[0].publisher_id;
                     }
             // Insert book
             const titleId = uuidv4();
@@ -90,8 +87,8 @@ export async function POST(request) {
                             const currentShelfLocation = parseInt(shelfLocation) + index;
                             
                             return client.query(
-                                'INSERT INTO books (title, author_id, genre_id, publisher_id, title_id, volume_number, shelf_location) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-                                [volumeTitle, authorId, genreId, publisherId, titleId, volumeNumber, currentShelfLocation]
+                                'INSERT INTO books (title, author_id, genre_id, publisher_id, title_id, volume_num, shelf_location) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+                                [title, authorId, genreId, publisherId, titleId, volumeNumber, currentShelfLocation]
                             );
                         });
 
