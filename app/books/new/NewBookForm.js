@@ -89,7 +89,7 @@ export default function NewBookForm() {
                 <label htmlFor="publisher" className="block text-sm font-medium text-gray-700">
                     Publisher
                 </label>
-                <textarea
+                <input
                     id="publisher"
                     value={formData.publisher}
                     onChange={(e) => setFormData({...formData, publisher: e.target.value})}

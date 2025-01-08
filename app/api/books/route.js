@@ -5,7 +5,7 @@ import pool from '../../../lib/db';
 
 export async function POST(request) {
     try {
-        const { title, author, genre, publisher, numberOfVolumes } = await request.json();
+        const { title, author, genre, publisher, numberOfVolumes, shelfLocation } = await request.json();
         const client = await pool.connect();
         
         try {
@@ -70,10 +70,10 @@ export async function POST(request) {
                     }
             // Insert book
             const titleId = uuidv4();
-            await client.query(
-                'INSERT INTO books ( title, author_id, genre_id, publisher_id, title_id) VALUES ($1, $2, $3, $4, $5)',
-                [ title, authorId, genreId, publisherId, titleId]
-            );
+            // await client.query(
+            //     'INSERT INTO books ( title, author_id, genre_id, publisher_id, title_id) VALUES ($1, $2, $3, $4, $5)',
+            //     [ title, authorId, genreId, publisherId, titleId]
+            // );
             
             // Insert volumes
             // for (let i = 0; i < numberOfVolumes; i++) {
@@ -82,6 +82,21 @@ export async function POST(request) {
             //         [bookId, 'New', 'Main Shelf']
             //     );
             // }
+
+            // Insert books for each volume with incrementing shelf locations
+            const bookInsertPromises = Array.from({ length: numberOfVolumes }, (_, index) => {
+                const volumeNumber = index + 1;
+                            // const volumeTitle = numberOfVolumes > 1 ? `${title} (Volume ${volumeNumber})` : title;
+                            const currentShelfLocation = parseInt(shelfLocation) + index;
+                            
+                            return client.query(
+                                'INSERT INTO books (title, author_id, genre_id, publisher_id, title_id, volume_number, shelf_location) VALUES ($1, $2, $3, $4, $5, $6, $7)',
+                                [volumeTitle, authorId, genreId, publisherId, titleId, volumeNumber, currentShelfLocation]
+                            );
+                        });
+
+                        await Promise.all(bookInsertPromises);
+
             await client.query('COMMIT');
             
             return NextResponse.json({ message: 'Book added successfully' }, { status: 201 });
