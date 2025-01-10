@@ -5,7 +5,8 @@ import pool from '../lib/db';
 async function getBooks() {
     const client = await pool.connect();
     try {
-        const result = await client.query('SELECT * FROM books ORDER BY book_id DESC');
+        const result = await client.query(
+            'SELECT books.*, authors.full_name AS author_name, genres.name AS genre_name FROM books INNER JOIN authors ON books.author_id = authors.author_id INNER JOIN genres ON books.genre_id = genres.genre_id ORDER BY book_id DESC');
         return result.rows;
     } finally {
         client.release();
@@ -30,8 +31,8 @@ export default async function Home() {
                 {books.map((book) => (
                     <div key={book.book_id} className="bg-white p-4 rounded-lg shadow">
                         <h2 className="text-xl font-semibold mb-2">{book.title}</h2>
-                        <p className="text-gray-600">By {book.author_id}</p>
-                        <p className="text-gray-500 mb-2">Genre: {book.genre_id}</p>
+                        <p className="text-gray-600">By {book.author_name}</p>
+                        <p className="text-gray-500 mb-2">Genre: {book.genre_name}</p>
                         <div className="flex justify-between mt-4">
                             <Link href={`/books/${book.id}`}
                                 className="text-blue-500 hover:text-blue-700">
