@@ -1,8 +1,8 @@
-// app/books/new/NewBookForm.js
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
+// app/dashboard/books/new/NewBookForm.js
 export default function NewBookForm() {
     const router = useRouter();
     const [formData, setFormData] = useState({
@@ -16,6 +16,7 @@ export default function NewBookForm() {
     });
 
     const handleSubmit = async (e) => {
+        
         e.preventDefault();
        
         try {
@@ -39,6 +40,7 @@ export default function NewBookForm() {
     };
 
     return (
+        
         <form onSubmit={handleSubmit} className="space-y-4">
             <div>
                 <label htmlFor="title" className="block text-sm font-medium text-gray-700">
