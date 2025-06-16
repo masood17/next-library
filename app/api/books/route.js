@@ -1,11 +1,11 @@
 // app/api/books/route.js
 import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
-import pool from '../../../lib/db';
+import pool from '../../lib/db';
 
 export async function POST(request) {
     try {
-        const { title, author, genre, publisher, numberOfVolumes, shelfLocation } = await request.json();
+        const { title, author, genre, publisher,publicationEdition, numberOfVolumes, shelfLocation } = await request.json();
         const client = await pool.connect();
         
         try {
@@ -87,8 +87,8 @@ export async function POST(request) {
                             const currentShelfLocation = parseInt(shelfLocation) + index;
                             
                             return client.query(
-                                'INSERT INTO books (title, author_id, genre_id, publisher_id, title_id, volume_num, shelf_location) VALUES ($1, $2, $3, $4, $5, $6, $7)',
-                                [title, authorId, genreId, publisherId, titleId, volumeNumber, currentShelfLocation]
+                                'INSERT INTO books (title, author_id, genre_id, publisher_id, publication_edition, title_id, volume_num, shelf_location) VALUES ($1, $2, $3, $4, $5, $6, $7, $8)',
+                                [title, authorId, genreId, publisherId, publicationEdition, titleId, volumeNumber, currentShelfLocation]
                             );
                         });
 
@@ -120,4 +120,9 @@ export async function GET() {
         console.error('Error fetching books:', error);
         return NextResponse.json({ error: 'Error fetching books' }, { status: 500 });
     }
+}
+
+export async function PUT(id){
+console.log(id);
+
 }

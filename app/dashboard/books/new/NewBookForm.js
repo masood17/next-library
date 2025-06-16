@@ -10,7 +10,7 @@ export default function NewBookForm() {
         author: '',
         genre: '',
         publisher: '',
-        publicationEdition: 1,
+        publicationEdition: 0,
         numberOfVolumes: 1,
         shelfLocation: 0
     });
@@ -80,6 +80,7 @@ export default function NewBookForm() {
                     required
                 >
                     <option value="">Select a genre</option>
+                    <option value="اصول الفقه وقواعده">اصول الفقه وقواعده</option>
                     <option value="التاريخ">التاريخ</option>
                     <option value="التراجم">التراجم</option>
                     <option value="التشيع">التشيع</option>
