@@ -21,7 +21,7 @@ export default function NewBookForm() {
        
         try {
             
-            console.log("i was tapped");
+           
             const response = await fetch('/api/books', {
                 method: 'POST',
                 headers: {
