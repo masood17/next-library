@@ -17,7 +17,7 @@ async function getBooks() {
 
 export default async function Home() {
     
-    const books = await getBooks();
+    // const books = await getBooks();
    
 
     return (
@@ -31,7 +31,7 @@ export default async function Home() {
             </div>
 
 
-<SimpleBookTable books={books}/>
+{/* <SimpleBookTable books={books}/> */}
                 
         </div>
     );
