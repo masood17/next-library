@@ -1,3 +1,3 @@
 export default function page(){
-<p>overview doc</p>
+return (<p>overview doc</p>);
 }
