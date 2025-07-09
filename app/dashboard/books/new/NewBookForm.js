@@ -38,7 +38,7 @@ export default function NewBookForm() {
             console.error('Error adding book:', error);
         }
     };
-// mvp
+
     return (
         
         
