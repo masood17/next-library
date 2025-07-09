@@ -5,8 +5,9 @@ import EditButton from './ui/shared/editButton';
 import SimpleBookTable from './ui/shared/booktable';
 
 async function getBooks() {
-    const client = await pool.connect();
+   let client;
     try {
+         const client = await pool.connect();
         const result = await client.query(
             'SELECT books.*, authors.full_name AS author_name, genres.name AS genre_name FROM books INNER JOIN authors ON books.author_id = authors.author_id INNER JOIN genres ON books.genre_id = genres.genre_id ORDER BY book_id DESC');
         return result.rows;
