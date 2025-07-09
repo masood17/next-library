@@ -38,8 +38,9 @@ export default function NewBookForm() {
             console.error('Error adding book:', error);
         }
     };
-
+// mvp
     return (
+        
         
         <form onSubmit={handleSubmit} className="space-y-4">
             <div>

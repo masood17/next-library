@@ -31,7 +31,7 @@ export default async function Home() {
             </div>
 
 
-{/* <SimpleBookTable books={books}/> */}
+<SimpleBookTable books={books}/>
                 
         </div>
     );
