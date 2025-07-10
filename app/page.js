@@ -1,8 +1,8 @@
 // app/page.js
 import Link from 'next/link';
-import pool from './lib/db';
+// import pool from './lib/db';
 import EditButton from './ui/shared/editButton';
-import SimpleBookTable from './ui/shared/booktable';
+// import SimpleBookTable from './ui/shared/booktable';
 
 // async function getBooks() {
 //    let client;
