@@ -1,10 +1,12 @@
 // app/page.js
 import Link from 'next/link';
-// import pool from './lib/db';
+import pool from './lib/db';
 import EditButton from './ui/shared/editButton';
 import SimpleBookTable from './ui/shared/booktable';
 
-// async function getBooks() {
+async function getBooks() {
+    const results = [];
+    return results
 //    let client;
 //     try {
 //         client = await pool.connect();
@@ -20,11 +22,11 @@ import SimpleBookTable from './ui/shared/booktable';
 //     } finally {
 //         client.release();
 //     }
-// }
+}
 
 export default async function Home() {
     
-    // const books = await getBooks();
+    const books = await getBooks();
    
 
     return (
@@ -38,7 +40,7 @@ export default async function Home() {
             </div>
 
 
-<SimpleBookTable />
+<SimpleBookTable books={books}/>
                 
         </div>
     );
