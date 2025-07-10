@@ -14,6 +14,27 @@ export default function RootLayout({ children }) {
                                       <span className="font-semibold text-gray-500 text-lg">
                                           Library Management
                                       </span>
+                                      <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
+                                {/* Navigation Links */}
+                                <a 
+                                    href="/dashboard" 
+                                    className="border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                                >
+                                    Overview
+                                </a>
+                                <a 
+                                    href="/dashboard/books" 
+                                    className="border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                                >
+                                    Books
+                                </a>
+                                <a 
+                                    href="/dashboard/users" 
+                                    className="border-transparent text-gray-500 hover:text-gray-700 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium"
+                                >
+                                    Users
+                                </a>
+                            </div>
                                   </div>
                               </div>
                           </div>
