@@ -11,6 +11,7 @@ export default function SimpleBookTable({ books }) {
             <th className="py-2 px-4 border-b text-center">Genre</th>
             <th className="py-2 px-4 border-b text-center">Year</th>
             <th className="py-2 px-4 border-b text-center">ISBN</th>
+            <th className="py-2 px-4 border-b text-center"></th>
           </tr>
         </thead>
         <tbody>
@@ -21,6 +22,7 @@ export default function SimpleBookTable({ books }) {
               <td className="py-2 px-4 border-b">{book.genre_name}</td>
               <td className="py-2 px-4 border-b">{book.publishedYear}</td>
               <td className="py-2 px-4 border-b">{book.isbn}</td>
+              <td className="py-2 px-4 border-b">buttons</td>
             </tr>
           ))}
         </tbody>

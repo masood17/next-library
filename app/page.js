@@ -2,7 +2,7 @@
 import Link from 'next/link';
 import pool from './lib/db';
 import EditButton from './ui/shared/editButton';
-import SimpleBookTable from './ui/shared/booktable';
+import SimpleBookTable from './ui/books/booktable';
 import {getBooks} from '@/app/lib/data'
 
 
