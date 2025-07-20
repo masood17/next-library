@@ -1,4 +1,5 @@
 'use client'
+import { UpdateBook } from "./buttons";
 
 export default function SimpleBookTable({ books }) {
   return (
@@ -22,7 +23,7 @@ export default function SimpleBookTable({ books }) {
               <td className="py-2 px-4 border-b">{book.genre_name}</td>
               <td className="py-2 px-4 border-b">{book.publishedYear}</td>
               <td className="py-2 px-4 border-b">{book.isbn}</td>
-              <td className="py-2 px-4 border-b">buttons</td>
+              <td className="py-2 px-4 border-b"><UpdateBook/></td>
             </tr>
           ))}
         </tbody>

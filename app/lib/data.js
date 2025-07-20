@@ -11,7 +11,7 @@ export async function getBooks() {
         
         return result.rows;
     } catch (error) {
-        // !!! THIS IS THE CRUCIAL PART !!!
+        
         console.error('DATABASE ERROR DURING BUILD:', error); // Log the specific error
         // Important: Return an empty array or throw a custom error
         // if you want the page to error out. Returning [] allows it to build.
