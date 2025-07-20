@@ -1,5 +1,6 @@
 // import {PencilIcon} from '@heroicons/react';
 import { PencilIcon } from '@heroicons/react/24/outline';
+
 import Link from 'next/link';
 
 
@@ -14,4 +15,14 @@ export function UpdateBook(id){
         <PencilIcon className="w-5" />
         </Link>
     );
+}
+
+export function AddBook(){
+  return(
+    <Link
+    href={`/dashboard/books/new`}
+    >
+    Add Book
+    </Link>
+  )
 }
