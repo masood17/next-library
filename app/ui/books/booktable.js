@@ -10,7 +10,7 @@ export default function SimpleBookTable({ books }) {
             <th className="py-2 px-4 border-b text-center">Title</th>
             <th className="py-2 px-4 border-b text-center">Author</th>
             <th className="py-2 px-4 border-b text-center">Genre</th>
-            <th className="py-2 px-4 border-b text-center">Year</th>
+            <th className="py-2 px-4 border-b text-center">Publisher</th>
             <th className="py-2 px-4 border-b text-center">ISBN</th>
             <th className="py-2 px-4 border-b text-center"></th>
           </tr>
@@ -21,9 +21,9 @@ export default function SimpleBookTable({ books }) {
               <td className="py-2 px-4 border-b">{book.title}</td>
               <td className="py-2 px-4 border-b">{book.author_name}</td>
               <td className="py-2 px-4 border-b">{book.genre_name}</td>
-              <td className="py-2 px-4 border-b">{book.publishedYear}</td>
+              <td className="py-2 px-4 border-b">{book.publisher_name}</td>
               <td className="py-2 px-4 border-b">{book.isbn}</td>
-              <td className="py-2 px-4 border-b"><UpdateBook/></td>
+              <td className="py-2 px-4 border-b"><UpdateBook id = {book.book_id}/></td>
             </tr>
           ))}
         </tbody>

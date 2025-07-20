@@ -7,7 +7,17 @@ export async function getBooks() {
     try {
         client = await pool.connect();
         const result = await client.query(
-            'SELECT books.*, authors.full_name AS author_name, genres.name AS genre_name FROM books INNER JOIN authors ON books.author_id = authors.author_id INNER JOIN genres ON books.genre_id = genres.genre_id ORDER BY book_id DESC');
+            `SELECT books.*, authors.full_name AS author_name, genres.name AS genre_name, publishers.name AS publisher_name
+            FROM
+             books 
+            INNER JOIN
+             authors ON books.author_id = authors.author_id 
+            INNER JOIN
+             genres ON books.genre_id = genres.genre_id 
+            INNER JOIN
+             publishers ON books.publisher_id = publishers.publisher_id
+            ORDER BY
+             book_id DESC`);
         
         return result.rows;
     } catch (error) {
