@@ -10,7 +10,7 @@ export default function NewBookForm() {
         author: '',
         genre: '',
         publisher: '',
-        publicationEdition: 0,
+        publicationEdition: 1,
         numberOfVolumes: 1,
         shelfLocation: 0
     });

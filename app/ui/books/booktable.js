@@ -23,7 +23,7 @@ export default function SimpleBookTable({ books }) {
               <td className="py-2 px-4 border-b">{book.genre_name}</td>
               <td className="py-2 px-4 border-b">{book.publisher_name}</td>
               <td className="py-2 px-4 border-b">{book.isbn}</td>
-              <td className="py-2 px-4 border-b"><UpdateBook id = {book.book_id}/></td>
+              <td className="py-2 px-4 border-b"><UpdateBook id = {book.title_id}/></td>
             </tr>
           ))}
         </tbody>
