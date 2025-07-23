@@ -9,9 +9,13 @@ export default async function AllBooks(){
     
     return(
     <div>
-        <p>all books</p>
-<AddBook/>
+       
+<div className="flex items-left p-3">
+    <AddBook/>
+</div>
+<div>
     <SimpleBookTable books={books}/>
+    </div>
     </div>
 );
 }

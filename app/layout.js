@@ -12,7 +12,7 @@ export default function RootLayout({ children }) {
                               <div className="flex space-x-7">
                                   <div className="flex items-center py-4">
                                       <span className="font-semibold text-gray-500 text-lg">
-                                          Library Management
+                                          DUAI Library Management
                                       </span>
                                       <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                                 {/* Navigation Links */}

@@ -7,5 +7,6 @@ export default async function Page(props){
     
     
     
-    <p>update Page</p>);
+    <p>update Page</p>
+);
 }
