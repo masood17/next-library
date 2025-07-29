@@ -2,6 +2,8 @@
 import { NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
 import pool from '../../lib/db';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/dist/server/api-utils';
 
 export async function POST(request) {
     try {
@@ -95,7 +97,8 @@ export async function POST(request) {
                         await Promise.all(bookInsertPromises);
 
             await client.query('COMMIT');
-            
+            revalidatePath('/dashboard/books');
+            redirect('/dashboard/books');
             return NextResponse.json({ message: 'Book added successfully' }, { status: 201 });
         } catch (error) {
             await client.query('ROLLBACK');

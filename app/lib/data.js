@@ -49,7 +49,7 @@ export async function fetchBookByID(id){
             WHERE books.title_id = $1;
             `, [id]);
     if (result.rows.length > 0) {
-      return result.rows[0]; // Return the first (and only) book found
+        return result.rows[0];
     } else {
       return null; // Return null if no book was found
     }  
