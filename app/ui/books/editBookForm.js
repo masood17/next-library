@@ -101,7 +101,7 @@ export default function EditBookForm({book}){
     </div>
 
         <div >
-        <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+        <label htmlFor="publisher" className="block text-sm font-medium text-gray-700">
            Publisher
         </label>
         <input
@@ -115,6 +115,25 @@ export default function EditBookForm({book}){
         
         </input>
 
+    </div>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th  className="py-2 px-4 border-b text-center">Publication Edition</th>
+                    <th  className="py-2 px-4 border-b text-center">Volumes</th>
+                    <th  className="py-2 px-4 border-b text-center">Shelf Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td className="py-2 px-4 border-b">{book.publication_edition}</td>
+                    <td className="py-2 px-4 border-b">Needs fixing</td>
+                    <td className="py-2 px-4 border-b">{book.shelf_location}</td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 
 </form>
