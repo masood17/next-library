@@ -98,6 +98,8 @@ export async function POST(request) {
 
             await client.query('COMMIT');
 
+            revalidatePath('/dashboard/books');
+
             return NextResponse.json({ message: 'Book added successfully' }, { status: 201 });
         } catch (error) {
             await client.query('ROLLBACK');
@@ -110,8 +112,8 @@ export async function POST(request) {
         console.error('Error adding book:', error);
         return NextResponse.json({ error: 'Error adding book' }, { status: 500 });
     }
-                            revalidatePath('/dashboard/books');
-            redirect('/dashboard/books');
+
+
 }
 
 export async function GET() {

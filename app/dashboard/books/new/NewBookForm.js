@@ -31,7 +31,7 @@ export default function NewBookForm() {
             });
             
             if (response.ok) {
-                router.push('/');
+                router.push('/dashboard/books');
                 router.refresh();
             }
         } catch (error) {
