@@ -11,7 +11,7 @@ export default async function AllBooks(){
     <div>
        
 <div className="flex items-left p-3">
-    <AddBook/>
+    {/* <AddBook/> */}
 </div>
 <div>
     <SimpleBookTable books={books}/>
